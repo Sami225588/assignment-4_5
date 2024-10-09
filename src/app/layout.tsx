@@ -37,7 +37,10 @@ export default function RootLayout({
 
         {/* Footer */}
         <footer className="bg-blue-500 p-4 text-white">
-          <p className="text-center">&copy; 2024 My Blog. All rights reserved.</p>
+          <p className="text-center ">&copy; 2024 My Blog. All rights reserved.
+          {/* <a href="" className='font-bold uppercase  text-black text-center p-3 rounded-3xl transition mt-4  '>about me</a> */}
+         <button className="btn relative ml-16 inline-flex items-center justify-start overflow-hidden transition-all bg-white rounded hover:bg-white group">    <span className="w-0 h-0 rounded bg-black absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full group-hover:h-full -z-1"></span>  <span className="w-full text-black transition-colors duration-300 ease-in-out group-hover:text-white p-2  z-10"><a target='_blank' href="https://cv2255.vercel.app/">ABOUT ME</a>  </span></button>
+          </p>
         </footer>
       </body>
     </html>
