@@ -1,101 +1,66 @@
-import Image from "next/image";
+// src/app/page.tsx
+import Link from 'next/link';
 
-export default function Home() {
+const blogs = [
+  {
+    id: 1,
+    title: 'FULL BODY WORKOUT',
+    description: 'Efficient training targeting all muscle groups in one session.',
+    image: 'data:image/jpeg;base64,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',
+  },
+  {
+    id: 2,
+    title: 'UPPER & LOWER SPLIT',
+    description: 'Alternates between upper and lower body muscle group training.',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTggvIJ6fh2TGVxYJA8D0VKyuRg2Ev6Nvfv3Q&s',
+  },
+  {
+    id: 3,
+    title: 'PUSH PULL LEG',
+    description: 'Focuses on pushing, pulling movements, and leg exercises each day.',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoqgwYdwMdSaqVYaap_oa4ZBKqsCpqLVcCzg&s',
+  },
+  {
+    id: 4,
+    title: 'PUSH PULL LEG PRO',
+    description: 'Combines intense push, pull, legs routine with added cardio.',
+    image: 'data:image/jpeg;base64,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',
+  },
+  {
+    id: 5,
+    title: 'SUPPLEMENTS',
+    description: 'Boosts gym performance, recovery, and muscle growth with added nutrients.',
+    image: 'https://media.istockphoto.com/id/533336742/photo/strongman-with-can-of-supplements.jpg?s=612x612&w=0&k=20&c=ckq9eDWfA9Fd6uPsIWun6hgw-w5aMAME-iHBGTrXlhc=',
+  },
+  {
+    id: 6,
+    title: 'DIET',
+    description: 'Structured nutrition plan supporting gym goals and muscle development.',
+    image: 'https://wellnessmunch.com/wp-content/uploads/2023/01/vegetable-gravy-gc16f7b7f2_640.jpg',
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="container   mx-auto px-4 py-8">
+      <h2 className="text-3xl  font-bold text-center text-white capitalize mb-8">Welcome to my gym blog</h2>
+      <div className="grid  text-white grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {blogs.map((blog) => (
+          <div 
+            key={blog.id}
+            className="border bg-blue-500 text-center text-white rounded-lg overflow-hidden transform hover:scale-105 shadow-lg hover:shadow-xl  transition-transform duration-300"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <img src={blog.image} alt={blog.title} className="w-full h-48 object-cover" />
+            <div className="p-4">
+              <h3 className="text-xl text-white font-bold">{blog.title}</h3>
+              <p className="mt-2  text-white" >{blog.description}</p>
+              <Link href={`/blog/${blog.id}`}>
+                <div className="text-black text-center p-4 rounded-3xl transition mt-4 block hover:bg-black hover:text-white bg-white">Read More</div>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
