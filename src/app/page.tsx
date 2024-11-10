@@ -1,6 +1,5 @@
 // src/app/page.tsx
-import { url } from 'inspector';
-import Link from 'next/link';
+import Link from  'next/link';
 
 const blogs = [
   {
